@@ -1,0 +1,37 @@
+{
+    "queimaduras": [
+        "como devo tratar uma queimadura leve em casa?",
+        "quais são os primeiros passos a serem tomados em caso de queimadura por produtos químicos?",
+        "é seguro usar gelo diretamente em uma queimadura?"
+    ],
+    "cortes e sangramentos": [
+        "qual é a melhor maneira de estancar o sangramento de um corte profundo?",
+        "como posso saber se um corte precisa de pontos?",
+        "existem riscos de infecção em cortes superficiais e como posso preveni-los?"
+    ],
+    "fraturas e entorses": [
+        "como identificar uma fratura versus uma entorse?",
+        "qual é o procedimento correto para imobilizar uma fratura até a chegada da ajuda médica?",
+        "quais são os cuidados iniciais para uma entorse de tornozelo?"
+    ],
+    "problemas respiratórios": [
+        "como ajudar alguém que está tendo um ataque de asma?",
+        "quais são os sinais de insuficiência respiratória e como devo reagir?",
+        "qual é a maneira correta de realizar a manobra de heimlich em uma pessoa engasgada?"
+    ],
+    "emergências cardíacas": [
+        "quais são os primeiros socorros para suspeita de ataque cardíaco?",
+        "como posso realizar a reanimação cardiopulmonar (RCP) em alguém que não está respirando?",
+        "existem medidas preventivas imediatas para alguém com sinais de arritmia cardíaca?"
+    ],
+    "picadas e mordidas": [
+        "como tratar uma picada de abelha ou vespa?",
+        "quais são os primeiros socorros para uma mordida de cobra?",
+        "o que fazer em caso de picadas de insetos em crianças?"
+    ],
+    "intoxicações e envenenamentos": [
+        "como identificar sinais de envenenamento por alimentos?",
+        "qual é a ação imediata a ser tomada em caso de intoxicação por monóxido de carbono?",
+        "o que fazer se alguém ingerir acidentalmente um produto químico doméstico?"
+    ]
+}
