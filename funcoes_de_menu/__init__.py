@@ -2,6 +2,10 @@ from funcoes_de_cadastro import *
 import requests
 import os
 from dotenv import load_dotenv
+import openai
+import time
+import dotenv
+import tiktoken
 load_dotenv()
 api_key = os.getenv('MAPS_API_KEY')
 def puxar_coordenadas(cep,api_key):
@@ -98,6 +102,7 @@ def validar_emergencia():
             print(f"Um erro inesperado ocorreu: {e}.")
         else:
             chaves = list(dados.keys())
+            linha()
             for i in range(len(chaves)):
                 print(f"{i + 1}. {chaves[i]}")
             linha()
@@ -124,5 +129,192 @@ def validar_emergencia():
     linha()
     print('limite de acidentes por chamada atingido')
     return lista_limite_acidentes
+
+def assistente_emergencias(prompt_user):
+    dotenv.load_dotenv()
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    prompt_sistema = """
+        Você é um especialista em primeiros socorros, irei te passar algumas perguntas, e você me responderá.
+        ##########
+        formato de saída:
+        pergunta em bullet point, e em baixo a resposta dessa pergunta, a resposta para cada perguntar deve 
+        ter no maximo 7 linhas, quando preencher uma linha, de um contra barra n para que possa ser visivel
+        as linhas no relatório
+    """
+    tentativas = 0
+    tempo_exponencial = 5
+    modelo = "gpt-3.5-turbo"
+    codificador = tiktoken.encoding_for_model(modelo)
+    lista_de_tokens = codificador.encode(prompt_sistema + prompt_user)
+    tokens = len(lista_de_tokens)
+    tamanho_esperado_saida = 2048
+    if tokens > (4096 - tamanho_esperado_saida):
+        modelo = "gpt-3.5-turbo-16k"
+    while tentativas < 5:
+        try:
+            cabecalho('GERANDO RELATÓRIO ...')
+            tentativas+=1
+            response = openai.ChatCompletion.create(
+                model=modelo,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": prompt_sistema
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt_user
+                    }
+                ],
+                temperature=1,
+                max_tokens=tamanho_esperado_saida,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+            )
+            resposta = response.choices[0].message.content
+            return resposta
+        except openai.error.AuthenticationError as e:
+            print(f'ERRO DE AUTENTICAÇÃO: {e}')
+        except openai.APIError as e:
+            print(f'ERRO DE API: {e}')
+            time.sleep(5)
+        except openai.error.RateLimitError as e:
+            print(f'ERRO LIMITE DE TAXA: {e}')
+            time.sleep(tempo_exponencial)
+            tempo_exponencial *= 2
+
+def criar_arquivo(nome,conteudo,caminho):
+    i = 1
+    arq = caminho + nome
+    nome_arquivo = arq + '.txt'
+    while os.path.exists(nome_arquivo):
+        cabecalho(f'{nome_arquivo} já encontrado')
+        nome_arquivo = f'{arq}-{i}.txt'
+        i+=1
+    try:
+        cabecalho(f'Criando arquivo {nome_arquivo}')
+        with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
+            arquivo.write(conteudo)
+    except IOError as e:
+        print(f'Houve um erro: {e}')
+
+def validar_doenca():
+    while True:
+        try:
+            with open('./arq_json/doencas-cronicas.json', 'r', encoding='utf-8') as arquivo:
+                dados = json.load(arquivo)
+        except FileNotFoundError:
+            print("O arquivo não foi encontrado.")
+        except IOError:
+            print("Erro de IO (Entrada/Saída).")
+        except Exception as e:
+            print(f"Um erro inesperado ocorreu: {e}.")
+        else:
+            for i, doenca_info in enumerate(dados):
+                print(f'{i+1}. Doença: {doenca_info["doenca"]} - Descrição: {doenca_info["descricao"]}')
+            opcao = validar_int('Digite o número da opção de doença que deseja: ')
+            if opcao > 0 and opcao <= len(dados):
+                return f'Doença: {dados[opcao-1]["doenca"]}, Descrição: {dados[opcao-1]["descricao"]}'
+            else:
+                print('Digite um número válido dentre as opções!')
+
+def assistente_crise_doencas(prompt_user):
+    dotenv.load_dotenv()
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    prompt_sistema = """
+        Você é um assistente virtual treinado em fornecer informações sobre gestão de doenças crônicas. Baseando-se em diretrizes médicas confiáveis, você fornecerá orientações claras e concisas sobre o que fazer durante uma crise aguda de uma doença crônica específica. Por favor, responda com recomendações práticas e passos de ação imediatos.
+
+        Doença Crônica: [Nome da Doença]
+        Tipo de Crise: [Descrição Breve da Crise]
+
+        Instruções:
+        1. Descreva os sinais de alerta que indicam que a pessoa está entrando em crise.
+        2. Forneça uma lista de ações imediatas que a pessoa deve tomar assim que reconhecer esses sinais.
+        3. Indique quando e como buscar ajuda médica.
+        4. Ofereça conselhos sobre como gerenciar a crise até que a ajuda médica esteja disponível ou até que a crise seja resolvida.
+        ##############
+        Formato de saída desejado:
+        - Sinais de Alerta: [Liste os sinais]
+        - Ações Imediatas: [Liste as ações em bullet points]
+        - Busca por Ajuda Médica: [Explique quando e como buscar ajuda]
+        - Gerenciamento da Crise: [Forneça dicas de gerenciamento]
+        """
+    tentativas = 0
+    tempo_exponencial = 5
+    modelo = "gpt-3.5-turbo"
+    codificador = tiktoken.encoding_for_model(modelo)
+    lista_de_tokens = codificador.encode(prompt_sistema + prompt_user)
+    tokens = len(lista_de_tokens)
+    tamanho_esperado_saida = 2048
+    if tokens > (4096 - tamanho_esperado_saida):
+        modelo = "gpt-3.5-turbo-16k"
+    while tentativas < 5:
+        print(f' tentativa = {tentativas}')
+        try:
+            cabecalho('GERANDO RELATÓRIO ...')
+            tentativas += 1
+            response = openai.ChatCompletion.create(
+                model=modelo,
+                messages=[
+                    {
+                        "role": "system",
+                        "content": prompt_sistema
+                    },
+                    {
+                        "role": "user",
+                        "content": prompt_user
+                    }
+                ],
+                temperature=1,
+                max_tokens=tamanho_esperado_saida,
+                top_p=1,
+                frequency_penalty=0,
+                presence_penalty=0
+            )
+            resposta = response.choices[0].message.content
+            return resposta
+        except openai.error.AuthenticationError as e:
+            print(f'ERRO DE AUTENTICAÇÃO: {e}')
+        except openai.APIError as e:
+            print(f'ERRO DE API: {e}')
+            time.sleep(5)
+        except openai.error.RateLimitError as e:
+            print(f'ERRO LIMITE DE TAXA: {e}')
+            time.sleep(tempo_exponencial)
+            tempo_exponencial *= 2
+
+
+def validar_sintomas():
+    while True:
+        try:
+            with open('./arq_json/sintomas.json', 'r', encoding='utf-8') as arquivo:
+                dados = json.load(arquivo)
+        except FileNotFoundError:
+            print("O arquivo não foi encontrado.")
+        except IOError:
+            print("Erro de IO (Entrada/Saída).")
+        except Exception as e:
+            print(f"Um erro inesperado ocorreu: {e}.")
+        else:
+            for k,v in dados.items():
+                linha()
+                print(f'Tipo de sintoma: {k}')
+                for j in v["sintomas"]:
+                    print(j)
+            linha()
+            sintoma = input('Digite aqui qual tipo de sintoma se assemelha ao oque você apresenta: ').lower().strip()
+            for key,value in dados.items():
+                if sintoma == key:
+                    linha()
+                    print('Poissiveis Doenças:')
+                    for i in value["condicoes"]:
+                        print(f'-{i}')
+                    linha()
+                    continuar = validar_continuar('Deseja continuar? [s,n]: ').lower().strip()
+                    if continuar == 'n':
+                        return
+            linha()
+            print('Digite um sintoma válido! se atente com as acentuação! ')
 
 

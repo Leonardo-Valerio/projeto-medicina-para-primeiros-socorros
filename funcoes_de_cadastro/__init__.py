@@ -78,14 +78,14 @@ def validar_user(nome):
             else:
                 print('digite um nome válido, com pelo menos 3 dígitos, utilize apenas letras no nome! ')
 
-def validar_senha(password):
+def validar_senha(password, usuario):
     while True:
         try:
             senha = input(password)
-            if senha.isalnum() and len(senha) >5:
+            if senha.isalnum() and len(senha) >5 and senha != usuario:
                 return senha
             else:
-                print('digite uma senha válida, com mais de 5 dígitos!')
+                print('digite uma senha válida, com mais de 5 dígitos e que não pode ser igual ao seu nome de usuário!')
         except IOError as e:
             print(f'ERRO: {e}')
 
@@ -135,7 +135,7 @@ def cadastro(menu_cadastro):
         if opcao == 1:
             cabecalho(menu_cadastro[0])
             novo_nome = validar_user('digite seu nome: ')
-            nova_senha = validar_senha('crie sua senha: ')
+            nova_senha = validar_senha('crie sua senha: ',novo_nome)
             numero_casa = validar_int('digite o número da sua residência: ')
             cep = encontrar_cep('digite o seu CEP (apenas números nesse campo): ', numero_casa)
             sexo = validar_sexo('digite o seu sexo (M para masculino ou F ára feminino): ')

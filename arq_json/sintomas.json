@@ -1,0 +1,22 @@
+{
+    "sintomas respiratórios": {
+        "sintomas": ["tosse persistente", "dificuldade para respirar", "chiado no peito"],
+        "condicoes": ["Asma", "Bronquite", "Pneumonia"]
+    },
+    "sintomas digestivos": {
+        "sintomas": ["dor abdominal", "náusea", "vômito", "diarreia"],
+        "condicoes": ["Gastroenterite", "Intoxicação Alimentar", "Úlcera"]
+    },
+    "sintomas de desidratação": {
+        "sintomas": ["sede excessiva", "boca seca", "urina escura", "cansaço"],
+        "condicoes": ["Desidratação", "Insolação"]
+    },
+    "sintomas gripais": {
+        "sintomas": ["febre", "dor de garganta", "coriza", "dor de cabeça"],
+        "condicoes": ["Gripe", "Resfriado Comum", "Covid-19"]
+    },
+    "sintomas alérgicos": {
+        "sintomas": ["espirros", "olhos lacrimejantes", "urticária", "coceira no nariz"],
+        "condicoes": ["Rinite Alérgica", "Alergia a Pólen", "Alergia a Animais"]
+    }
+}

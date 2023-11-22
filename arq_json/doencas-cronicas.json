@@ -1,0 +1,66 @@
+[
+    {
+        "doenca": "asma",
+        "descricao": "doença respiratória crônica caracterizada por episódios de dificuldade respiratória, chiado no peito e tosse."
+    },
+    {
+        "doenca": "diabetes tipo 1",
+        "descricao": "crises de hipoglicemia ou cetoacidose diabética."
+    },
+    {
+        "doenca": "diabetes tipo 2",
+        "descricao": "risco de hiperglicemia e complicações associadas."
+    },
+    {
+        "doenca": "epilepsia",
+        "descricao": "crises ou convulsões que variam em frequência e intensidade."
+    },
+    {
+        "doenca": "dpoc",
+        "descricao": "episódios de exacerbação, com aumento da falta de ar e produção de muco."
+    },
+    {
+        "doenca": "insuficiência cardíaca",
+        "descricao": "crises de descompensação cardíaca, com falta de ar e edema."
+    },
+    {
+        "doenca": "angina",
+        "descricao": "episódios de dor no peito devido à diminuição do fluxo sanguíneo para o coração."
+    },
+    {
+        "doenca": "esclerose múltipla",
+        "descricao": "surto ou exacerbação dos sintomas neurológicos."
+    },
+    {
+        "doenca": "doenças inflamatórias intestinais",
+        "descricao": "crises de dor abdominal, diarreia severa e sangramento."
+    },
+    {
+        "doenca": "enxaqueca",
+        "descricao": "episódios intensos de dor de cabeça, frequentemente acompanhados por náuseas, vômitos e sensibilidade à luz."
+    },
+    {
+        "doenca": "artrite reumatoide",
+        "descricao": "crises de dor e inflamação nas articulações."
+    },
+    {
+        "doenca": "transtorno bipolar",
+        "descricao": "variações extremas de humor, incluindo episódios maníacos e depressivos."
+    },
+    {
+        "doenca": "doença renal crônica",
+        "descricao": "em estágios avançados, crises de acúmulo de toxinas no sangue e necessidade de diálise."
+    },
+    {
+        "doenca": "gota",
+        "descricao": "ataques agudos de dor, inchaço e vermelhidão nas articulações."
+    },
+    {
+        "doenca": "transtornos de ansiedade",
+        "descricao": "episódios agudos de ansiedade, como ataques de pânico."
+    },
+    {
+        "doenca": "doença celíaca",
+        "descricao": "reações agudas à ingestão de glúten, incluindo dor abdominal, diarreia e fadiga."
+    }
+]

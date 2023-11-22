@@ -5,7 +5,7 @@ opcoes_cadastro=['CADASTRAR', 'FAZER LOGIN', 'ENTRAR SEM LOGIN']
 
 acesso = cadastro(opcoes_cadastro)
 
-opcoes_menu = ['HOSPITAIS MAIS PERTOS DE MIM','CONSULTOR DE EMERGÊNCIAS MÉDICAS', 'SAIR']
+opcoes_menu = ['HOSPITAIS MAIS PERTOS DE MIM','ASSISTENTE DE EMERGÊNCIAS MÉDICAS','ASSISTENTE DE CRISES DE DOENÇAS','AVALIADOR DE SINTOMAS', 'SAIR']
 
 while True:
     linha()
@@ -32,10 +32,29 @@ while True:
         resultado = puxar_coordenadas(cep,api_key)
         hospitais = find_hospitals(resultado["lat"], resultado["lng"], api_key,2000)
     elif opcao == 2:
-        cabecalho(opcoes_menu[1])
-        acidentes = validar_emergencia()
-        print(acidentes)
+        if acesso != []:
+            cabecalho(opcoes_menu[1])
+            acidentes = validar_emergencia()
+            relatorio = assistente_emergencias(f'{acidentes}')
+            criar_arquivo(acesso["nome"], relatorio, './arquivos-assistente-emergencias/assistente-emergencias-')
+        else:
+            cabecalho('FAÇA SEU LOGIN PARA ACESSAR ESSA FUNCIONALIDADE')
+            acesso = cadastro(opcoes_cadastro)
     elif opcao == 3:
+        if acesso != []:
+            cabecalho(opcoes_menu[2])
+            doenca = validar_doenca()
+            cabecalho(doenca)
+            relatorio = assistente_crise_doencas(doenca)
+            print(relatorio)
+            criar_arquivo(acesso["nome"], relatorio, './arquivos-assistente-crises-doencas/assistente-crises-emergenciais-')
+        else:
+            cabecalho('FAÇA SEU LOGIN PARA ACESSAR ESSA FUNCIONALIDADE')
+            acesso = cadastro(opcoes_cadastro)
+    elif opcao == 4:
+        cabecalho(opcoes_menu[3])
+        validar_sintomas()
+    elif opcao == 5:
         cabecalho('SAINDO...')
         break
     else:
