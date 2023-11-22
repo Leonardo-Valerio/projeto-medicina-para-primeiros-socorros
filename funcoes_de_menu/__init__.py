@@ -16,7 +16,7 @@ def puxar_coordenadas(cep,api_key):
         localizacao = resposta["results"][0]["geometry"]["location"]
         return localizacao
 
-def find_hospitals(latitude, longitude, api_key,area):
+def encontrar_hospitais(latitude, longitude, api_key,area):
     max_area = 50000
     if area >= max_area:
         print('a area para busca excedeu os limites')
@@ -29,7 +29,7 @@ def find_hospitals(latitude, longitude, api_key,area):
             print(f'nenhum hospital achado na area de {area} metros')
             linha()
             area+=1000
-            find_hospitals(latitude,longitude,api_key,area)
+            encontrar_hospitais(latitude,longitude,api_key,area)
         for i in dados["results"]:
             print(f'Hospital: {i["name"]} - Endereço: {i["vicinity"]}')
         linha()
@@ -134,12 +134,15 @@ def assistente_emergencias(prompt_user):
     dotenv.load_dotenv()
     openai.api_key = os.getenv("OPENAI_API_KEY")
     prompt_sistema = """
-        Você é um especialista em primeiros socorros, irei te passar algumas perguntas, e você me responderá.
-        ##########
-        formato de saída:
-        pergunta em bullet point, e em baixo a resposta dessa pergunta, a resposta para cada perguntar deve 
-        ter no maximo 7 linhas, quando preencher uma linha, de um contra barra n para que possa ser visivel
-        as linhas no relatório
+    Você é um assistente virtual especializado em primeiros socorros. Vou lhe fazer algumas perguntas específicas e 
+    preciso que suas respostas sejam breves, claras e informativas. Cada resposta deve ser limitada a no máximo 
+    7 linhas, com quebras de linha adequadas para garantir a clareza na visualização do relatório.
+
+    Formato de saída esperado:
+    - Pergunta: [Insira a pergunta aqui]
+    - Resposta: [Resposta concisa e informativa. Use '\n' para quebrar as linhas e manter a resposta dentro do limite 
+    de 7 linhas.]
+
     """
     tentativas = 0
     tempo_exponencial = 5

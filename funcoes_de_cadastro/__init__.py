@@ -23,21 +23,16 @@ def validar_int(n):
         else:
             return num
 
-def validar_sexo(s):
-    while True:
-        sexo = input(s).upper()
-        if sexo in ['M','F']:
-            return sexo
-        print('responda entre (M ou F)!')
 
 
-def fazer_cadastro(nome, senha, cep, sexo):
+def fazer_cadastro(nome, senha, cep):
     nome_arquivo = './arquivo_cadastros/cadastros.json'
     novo_usuario = {
         "nome": nome,
         "senha": senha,
-        "sexo": sexo,
         "cep": cep["cep"],
+        "estado": cep["uf"],
+        "bairro": cep["bairro"],
         "rua": cep["logradouro"],
         "numero": cep["numero"]
     }
@@ -45,15 +40,16 @@ def fazer_cadastro(nome, senha, cep, sexo):
     try:
         with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
             dados = json.load(arquivo)
-            print('abriu')
 
         dados.append(novo_usuario)
 
         with open(nome_arquivo, 'w', encoding='utf-8') as arquivo:
             json.dump(dados, arquivo, indent=4)
         cabecalho('CADASTRO REALIZADO COM SUCESSO!')
-    except IOError as e:
-        print(f'ERRO: {e}')
+    except FileNotFoundError:
+        print("O arquivo não foi encontrado.")
+    except Exception as e:
+        print(f"Um erro inesperado ocorreu: {e}.")
 
 
 
@@ -61,8 +57,10 @@ def validar_user(nome):
     try:
         with open('./arquivo_cadastros/cadastros.json', 'r', encoding='utf-8') as arquivo:
             dados = json.load(arquivo)
-    except IOError as e:
-        print(f'ERRO: {e}')
+    except FileNotFoundError:
+        print("O arquivo não foi encontrado.")
+    except Exception as e:
+        print(f"Um erro inesperado ocorreu: {e}.")
     else:
         while True:
             liberar_usuario = True
@@ -108,12 +106,16 @@ def encontrar_cep(num_cep, num_casa=0):
                 print(f'Ocorreu um erro: {e}')
 
 
+
+
 def fazer_login(name,password):
     try:
         with open('./arquivo_cadastros/cadastros.json', 'r', encoding='utf-8') as arquivo:
             dados = json.load(arquivo)
-    except IOError as e:
-        print(f'ERRO: {e}')
+    except FileNotFoundError:
+        print("O arquivo não foi encontrado.")
+    except Exception as e:
+        print(f"Um erro inesperado ocorreu: {e}.")
     else:
         while True:
             nome = input(name).lower()
@@ -138,8 +140,7 @@ def cadastro(menu_cadastro):
             nova_senha = validar_senha('crie sua senha: ',novo_nome)
             numero_casa = validar_int('digite o número da sua residência: ')
             cep = encontrar_cep('digite o seu CEP (apenas números nesse campo): ', numero_casa)
-            sexo = validar_sexo('digite o seu sexo (M para masculino ou F ára feminino): ')
-            fazer_cadastro(novo_nome,nova_senha,cep,sexo)
+            fazer_cadastro(novo_nome,nova_senha,cep)
         elif opcao == 2:
             cabecalho(menu_cadastro[1])
             acesso = fazer_login('digite seu nome: ','digite sua senha: ')

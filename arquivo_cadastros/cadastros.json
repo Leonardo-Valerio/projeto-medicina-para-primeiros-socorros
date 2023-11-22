@@ -2,49 +2,91 @@
     {
         "nome": "leo",
         "senha": "leo123",
-        "sexo": "M",
-        "cep": "40325-825",
-        "rua": "Vila Brasil",
-        "numero": 34
+        "cep": "253",
+        "estado": "RJ",
+        "bairro": "Vila Velha (Santo Aleixo)",
+        "rua": "Rua Itagua\u00ed",
+        "numero": 25912194
     },
     {
-        "nome": "ricardo",
-        "senha": "rick123",
-        "sexo": "M",
-        "cep": "69305-180",
-        "rua": "Rua Jo\u00e3o Paulo I",
-        "numero": 321
+        "nome": "joel",
+        "senha": "joel456",
+        "cep": "38441-016",
+        "estado": "MG",
+        "bairro": "Bras\u00edlia",
+        "rua": "Rua Tr\u00eas",
+        "numero": 561
     },
     {
-        "nome": "enrico",
-        "senha": "enrico",
-        "sexo": "M",
-        "cep": "68627-375",
-        "rua": "Rua S\u00e3o Francisco de Assis",
-        "numero": 712
+        "nome": "andersson",
+        "senha": "ander55",
+        "cep": "45985-693",
+        "estado": "BA",
+        "bairro": "Ouro Verde",
+        "rua": "Travessa Ana Torquato",
+        "numero": 904
     },
     {
-        "nome": "breno",
-        "senha": "brenin",
-        "sexo": "M",
-        "cep": "57302-675",
-        "rua": "Rua Maria Nunes Costa",
-        "numero": 1221
+        "nome": "leticia",
+        "senha": "let123",
+        "cep": "53160-640",
+        "estado": "PE",
+        "bairro": "\u00c1guas Compridas",
+        "rua": "Rua da Luciana",
+        "numero": 716
     },
     {
-        "nome": "andrea",
-        "senha": "andrea456",
-        "sexo": "F",
-        "cep": "03422-000",
-        "rua": "Avenida Guilherme Giorgi",
-        "numero": 32
+        "nome": "jose",
+        "senha": "josepaulo",
+        "cep": "58704-170",
+        "estado": "PB",
+        "bairro": "Belo Horizonte",
+        "rua": "Rua Manoel Pereira Neto",
+        "numero": 38
     },
     {
-        "nome": "fabio",
-        "senha": "fabio321",
-        "sexo": "M",
-        "cep": "64008-070",
-        "rua": "Rua Francisco Rodrigues Filho",
-        "numero": 32
+        "nome": "karine",
+        "senha": "kaka789",
+        "cep": "23898-015",
+        "estado": "RJ",
+        "bairro": "Campo Lindo",
+        "rua": "Rua Izabel Carmo de Azevedo",
+        "numero": 430
+    },
+    {
+        "nome": "gabriella",
+        "senha": "gabilela",
+        "cep": "68627-515",
+        "estado": "PA",
+        "bairro": "Nova Conquista",
+        "rua": "Rua Caet\u00e9s",
+        "numero": 59
+    },
+    {
+        "nome": "luizalberto",
+        "senha": "alaberto7",
+        "cep": "57316-160",
+        "estado": "AL",
+        "bairro": "Jardim Tropical",
+        "rua": "Rua Pedro Balbino",
+        "numero": 21
+    },
+    {
+        "nome": "daniella",
+        "senha": "dani901",
+        "cep": "77001-138",
+        "estado": "TO",
+        "bairro": "Plano Diretor Norte",
+        "rua": "Quadra AVNO 20 Avenida Joaquim Teot\u00f4nio Segurado",
+        "numero": 965
+    },
+    {
+        "nome": "juliana",
+        "senha": "juju72",
+        "cep": "74769-751",
+        "estado": "GO",
+        "bairro": "Loteamento Tupynamb\u00e1 dos Reis",
+        "rua": "Rua TR 2",
+        "numero": 1008
     }
 ]

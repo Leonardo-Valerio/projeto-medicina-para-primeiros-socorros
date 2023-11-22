@@ -22,15 +22,14 @@ while True:
                     print(cep)
                     break
                 elif pergunta == 2:
-                    numero_casa = validar_int('Digite o número da sua casa: ')
-                    cep = encontrar_cep('digite o seu CEP (apenas números nesse campo): ', numero_casa)
+                    cep = encontrar_cep('digite o seu CEP (apenas números nesse campo): ')
                     break
                 else:
                     cabecalho('Digite entre 1 e 2!')
         else:
             cep = encontrar_cep('digite o seu CEP (apenas números nesse campo): ')
         resultado = puxar_coordenadas(cep,api_key)
-        hospitais = find_hospitals(resultado["lat"], resultado["lng"], api_key,2000)
+        hospitais = encontrar_hospitais(resultado["lat"], resultado["lng"], api_key,2000)
     elif opcao == 2:
         if acesso != []:
             cabecalho(opcoes_menu[1])
